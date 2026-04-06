@@ -1,0 +1,55 @@
+diffusion:
+  model_type: 'dit'
+  num_classes: 1             # Tylko jedna klasa: ropa naftowa
+  target_channels: 1         # ZMIANA: 1 kanał (stopy zwrotu), nie 3 (RGB)
+  z_channels: 512
+  depth: 8
+  width: 512                 # ZMNIEJSZONE: 2048 to overkill, 512 będzie szybsze i stabilniejsze
+  num_sampling_steps: '50'   # Przyspieszona generacja
+  ema_decay: 0.999
+  learn_sigma: false
+  grad_checkpoint: false
+  patch_size: 1
+  channel_mult: [1, 2]       # Uproszczona hierarchia
+
+backbone:
+    model_type: 'none'       # REKOMENDACJA: Wyłącz backbone. EfficientNet szuka psów/kotów, nie trendów rynkowych.
+    pretrained: false
+
+data:
+  batch_size: 256             # Możesz zwiększyć, bo model jest lżejszy
+  category: oil
+  data_root: data/oil        # Tu wrzuć swoje przetworzone pliki
+  dataset_name: oil_dataset  # Nazwa klasy, którą musisz dodać w src/datasets
+  img_size: 4             # Przy założeniu okna czasowego 16 dni (4x4=16)
+  multi_category: false
+  num_normal_samples: -1
+  num_workers: 2
+  pin_memory: true
+  train: true
+  transform_type: none       # KRYTYCZNE: wyłącz 'imagenet', bo on psuje szeregi czasowe (np. losowe wycinanie fragmentów)
+
+optimizer:
+  grad_clip: 1.0
+  init_lr: 0.000001
+  peak_lr: 0.0001            # Nieco wyższy LR dla mniejszego modelu
+  final_lr: 0.000005
+  num_epochs: 100            # Dane finansowe potrzebują więcej epok na znalezienie wzorców
+  optimizer_name: adamw
+  scheduler_type: warmup_cosine
+  warmup_epochs: 20
+  weight_decay: 0.01
+
+logging:
+  log_interval: 10
+  save_interval: 100
+  save_images: false
+  save_dir: 'results/oil_diffusion_experiment'
+
+evaluation:
+  eval_interval: 5
+  eval_step: 3
+
+meta:
+  seed: 42
+  device: 'cuda'
