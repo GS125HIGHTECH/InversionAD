@@ -4,8 +4,8 @@ diffusion:
   target_channels: 1         # ZMIANA: 1 kanał (stopy zwrotu), nie 3 (RGB)
   z_channels: 512
   depth: 8
-  width: 512                 # ZMNIEJSZONE: 2048 to overkill, 512 będzie szybsze i stabilniejsze
-  num_sampling_steps: '50'   # Przyspieszona generacja
+  width: 512
+  num_sampling_steps: '200'
   ema_decay: 0.999
   learn_sigma: false
   grad_checkpoint: false
@@ -17,7 +17,7 @@ backbone:
     pretrained: false
 
 data:
-  batch_size: 256             # Możesz zwiększyć, bo model jest lżejszy
+  batch_size: 256
   category: oil
   data_root: data/oil        # Tu wrzuć swoje przetworzone pliki
   dataset_name: oil_dataset  # Nazwa klasy, którą musisz dodać w src/datasets
