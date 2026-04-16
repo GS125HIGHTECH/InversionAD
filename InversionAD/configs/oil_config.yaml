@@ -24,7 +24,7 @@ data:
   img_size: 4             # Przy założeniu okna czasowego 16 dni (4x4=16)
   multi_category: false
   num_normal_samples: -1
-  num_workers: 2
+  num_workers: 0
   pin_memory: true
   train: true
   transform_type: none       # KRYTYCZNE: wyłącz 'imagenet', bo on psuje szeregi czasowe (np. losowe wycinanie fragmentów)
