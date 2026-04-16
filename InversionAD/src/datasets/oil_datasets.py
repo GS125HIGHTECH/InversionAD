@@ -30,7 +30,7 @@ class OilDataset(Dataset):
 
         self.samples = []
         self.final_labels = []
-        step = self.window_size
+        step = self.img_size
 
         for i in range(0, len(normalized_data) - self.window_size, step):
             window = normalized_data[i: i + self.window_size]
