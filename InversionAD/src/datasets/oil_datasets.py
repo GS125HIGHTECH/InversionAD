@@ -25,7 +25,17 @@ class OilDataset(Dataset):
         else:
             raw_labels = np.zeros(len(returns))
 
-        self.mean, self.std = returns.mean(), returns.std()
+        if train:
+            self.mean, self.std = returns.mean(), returns.std()
+        else:
+            self.mean = kwargs.get('train_mean')
+            self.std = kwargs.get('train_std')
+
+            if self.mean is None or self.std is None:
+                print("WARNING: Brak train_mean/std w kwargs! Używam fallback 0.0/1.0 (możliwy błąd!)")
+                self.mean = 0.0
+                self.std = 1.0
+
         normalized_data = (returns - self.mean) / (self.std + 1e-8)
 
         self.samples = []

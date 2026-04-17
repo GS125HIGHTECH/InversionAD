@@ -21,7 +21,7 @@ data:
   category: oil
   data_root: data/oil        # Tu wrzuć swoje przetworzone pliki
   dataset_name: oil_dataset  # Nazwa klasy, którą musisz dodać w src/datasets
-  img_size: 4             # Przy założeniu okna czasowego 16 dni (4x4=16)
+  img_size: 4
   multi_category: false
   num_normal_samples: -1
   num_workers: 0
