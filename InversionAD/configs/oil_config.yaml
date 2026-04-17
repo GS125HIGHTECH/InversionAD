@@ -34,7 +34,7 @@ optimizer:
   init_lr: 0.000001
   peak_lr: 0.0001
   final_lr: 0.000005
-  num_epochs: 150            # Dane finansowe potrzebują więcej epok na znalezienie wzorców
+  num_epochs: 100            # Dane finansowe potrzebują więcej epok na znalezienie wzorców
   optimizer_name: adamw
   scheduler_type: warmup_cosine
   warmup_epochs: 20
@@ -47,9 +47,8 @@ logging:
   save_dir: 'results/oil_diffusion_experiment'
 
 evaluation:
-  eval_interval: 10
-  eval_step: 3
   eval_interval: 5
+  eval_step: 3
 
 meta:
   seed: 42
