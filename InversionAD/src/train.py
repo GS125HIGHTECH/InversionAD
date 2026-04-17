@@ -86,8 +86,8 @@ def main(config):
     device = config['meta']['device']
     batch_size = config['data']['batch_size']
     train_dataset = build_dataset(**config['data'])
-    train_mean = train_dataset.mean
-    train_std = train_dataset.std
+    train_mean = train_dataset.mean.item() if hasattr(train_dataset.mean, 'item') else train_dataset.mean
+    train_std = train_dataset.std.item() if hasattr(train_dataset.std, 'item') else train_dataset.std
     dataset_config['train_mean'] = train_mean
     dataset_config['train_std'] = train_std
     dataset_config['train'] = False
