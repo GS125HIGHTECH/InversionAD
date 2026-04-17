@@ -17,7 +17,7 @@ backbone:
     pretrained: false
 
 data:
-  batch_size: 256
+  batch_size: 64
   category: oil
   data_root: data/oil        # Tu wrzuć swoje przetworzone pliki
   dataset_name: oil_dataset  # Nazwa klasy, którą musisz dodać w src/datasets
@@ -49,6 +49,7 @@ logging:
 evaluation:
   eval_interval: 10
   eval_step: 3
+  eval_interval: 5
 
 meta:
   seed: 42
