@@ -30,9 +30,9 @@ class OilDataset(Dataset):
 
         self.samples = []
         self.final_labels = []
-        step = 1
+        step = self.window_size
 
-        for i in range(0, len(normalized_data) - self.window_size, step):
+        for i in range(0, len(normalized_data) - self.window_size + 1, step):
             window = normalized_data[i: i + self.window_size]
             label = 1 if np.any(raw_labels[i : i + self.window_size] == 1) else 0
 
