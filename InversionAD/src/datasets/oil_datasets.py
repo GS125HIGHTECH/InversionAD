@@ -13,6 +13,7 @@ class OilDataset(Dataset):
         self.data_root = data_root
         self.img_size = img_size
         self.window_size = img_size * img_size
+        self.contamination_rate = 0.004
 
         self._ensure_data_exists()
 
@@ -120,7 +121,7 @@ class OilDataset(Dataset):
         df_clean = df_clean.dropna(subset=['log_returns'])
 
         X = df_clean[['log_returns']].values
-        model = IsolationForest(n_estimators=1000, contamination=0.005, random_state=42)
+        model = IsolationForest(n_estimators=1000, contamination=self.contamination_rate, random_state=42)
         df_clean['anomaly'] = model.fit_predict(X)
 
         anomalies = df_clean[df_clean['anomaly'] == -1]
