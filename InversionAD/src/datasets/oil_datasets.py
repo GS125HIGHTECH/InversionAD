@@ -13,7 +13,7 @@ class OilDataset(Dataset):
         self.data_root = data_root
         self.img_size = img_size
         self.window_size = img_size * img_size
-        self.contamination_rate = 0.004
+        self.contamination_rate = 0.006
 
         self._ensure_data_exists()
 
